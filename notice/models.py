@@ -10,7 +10,7 @@ class Notice(models.Model):
         verbose_name='Текст объявления',
         help_text='Введите тектс объявления'
     )
-    authore_name = models.CharField(
+    author_name = models.CharField(
         max_length=50,
         verbose_name='Имя автора',
         help_text='Введите имя автора объявления'
