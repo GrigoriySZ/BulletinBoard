@@ -19,7 +19,7 @@ def notice_detail(request, notice_id):
     }
     return render(request, 'notice/notice_detail.html', context)
 
-def notice_create(request):
+def create_notice(request):
     if request.method == 'POST':
         form = NoticeCreateForm(request.POST)
         if form.is_valid():
