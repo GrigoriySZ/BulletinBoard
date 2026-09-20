@@ -12,10 +12,10 @@ class Notice(models.Model):
         verbose_name='Текст объявления',
         help_text='Введите тектс объявления'
     )
-    author_name = models.ForeignKey(
+    author = models.ForeignKey(
         User,
         on_delete=models.CASCADE,
-        verbose_name='Имя автора',
+        verbose_name='Автор',
         related_name='notices',
         null=True,
         blank=True
