@@ -1,0 +1,25 @@
+{% extends "notice/base.html" %}
+{% block title %} {{ page_title }} {% endblock %}
+
+{% block content %}
+    <h1>Все объявления</h1>
+    {% if notices %}
+        {% for notice in notices %}
+            <article>
+                <h2>
+                    <a href="{% url 'notice:notice_detail' notice.id %}">
+                        {{ notice.title }}
+                    </a>
+                </h2>
+                <div>
+                    {{notice.author_name}}
+                </div>
+                <div>
+                    {{notice.created_at|date:"d.m.Y H:i"}}
+                </div>
+            </article>
+        {% endfor %}
+    {% else %}
+        <div>Пока нет ни одного объявления</div>
+    {% endif %}
+{% endblock %}
