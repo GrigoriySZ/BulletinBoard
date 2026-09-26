@@ -2,7 +2,18 @@
 {% block title %} {{ page_title }} {% endblock %}
 
 {% block content %}
-    <h1>Все объявления</h1>
+    <h1>Публичная доска объявлений</h1>
+
+    <h2>Создать объявление</h2>
+    <form method="post">
+        {% csrf_token %}
+        {{ form }}
+        <button type="submit">
+            Опубликовать объявление
+        </button>
+    </form>
+
+    <h2>Список объявлений</h2>
     {% if notices %}
         {% for notice in notices %}
             <article>
