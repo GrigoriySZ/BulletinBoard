@@ -4,12 +4,11 @@ from django.contrib import messages
 from .models import Notice
 from .forms import NoticeCreateForm
 
-@login_required
 def notice_list(request):
     notices = Notice.objects.all().order_by('-created_at')
 
     if request.method == 'POST':
-        if not request.user.is_authinticated:
+        if not request.user.is_authenticated:
             messages.warning(request, 'Авторизируйтесь, чтобы оставить объявление')
             return redirect('login')
         form = NoticeCreateForm(request.POST)

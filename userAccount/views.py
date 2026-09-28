@@ -17,4 +17,4 @@ def register(request):
         'form': form,
         'page_title': 'Регистрация'
     }
-    return render(request, 'userAccount/register.html', context)
+    return render(request, 'registaration/register.html', context)

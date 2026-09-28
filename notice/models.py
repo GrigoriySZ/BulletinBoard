@@ -12,18 +12,18 @@ class Notice(models.Model):
         verbose_name='Текст объявления',
         help_text='Введите тектс объявления'
     )
-    author = models.ForeignKey(
-        User,
-        on_delete=models.CASCADE,
-        verbose_name='Автор',
-        related_name='notices',
-        null=True,
-        blank=True
-    )
     created_at = models.DateTimeField(
         auto_now_add=True,
         verbose_name='Дата создания'
     )
+    author = models.ForeignKey(
+            User,
+            on_delete=models.CASCADE,
+            verbose_name='Автор',
+            related_name='notices',
+            null=True,
+            blank=True,
+        )
 
     def __str__(self):
         return self.title
