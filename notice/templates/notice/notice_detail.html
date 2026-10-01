@@ -10,11 +10,31 @@
 
     <article>
         <h1>{{ notice.title }}</h1>
+        <span>{{ notice.author }}</span>
         <div>
             {{ notice.created_at|date:"d.m.Y H:i" }}
         </div>
         <div>
             {{ notice.content }}
         </div>
+        {% if user == notice.author %}
+            <a href="{% url 'notice:edit_notice' notice.id %}">
+                Редактирование
+            </a>
+            <a href="{% url 'notice:delete_notice' notice.id %}">
+                Удалить
+            </a>
+        {% endif %}
+
+        {% if confirm_deletion %}
+            <div>
+                <p>Вы действительно хотите удалить объявление?</p>
+                <form action="{% url 'notice:delete_notice' notice.id %}" method="post">
+                    {% csrf_token %}
+                    <button type="submit" name="confirm_deletion">Да, удалить</button>
+                    <a href="{% url 'notice:notice_detail' notice.id %}"></a>
+                </form>
+            </div>
+        {% endif %}
     </article>
 {% endblock %}

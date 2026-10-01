@@ -1,4 +1,6 @@
 from django.db import models
+from django.contrib.auth.models import User
+
 
 class Notice(models.Model):
     title = models.CharField(
@@ -10,15 +12,18 @@ class Notice(models.Model):
         verbose_name='Текст объявления',
         help_text='Введите тектс объявления'
     )
-    author_name = models.CharField(
-        max_length=50,
-        verbose_name='Имя автора',
-        help_text='Введите имя автора объявления'
-    )
     created_at = models.DateTimeField(
         auto_now_add=True,
         verbose_name='Дата создания'
     )
+    author = models.ForeignKey(
+            User,
+            on_delete=models.CASCADE,
+            verbose_name='Автор',
+            related_name='notices',
+            null=True,
+            blank=True,
+        )
 
     def __str__(self):
         return self.title
