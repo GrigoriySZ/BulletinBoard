@@ -23,10 +23,9 @@ class Profile(models.Model):
         blank=True,
         verbose_name='Номер телефона'
     )
-    email = models.EmailField(
-        max_length=50,
-        blank=True,
-        verbose_name='Электронная почта'
+    is_moderator = models.BooleanField(
+        default=False,
+        verbose_name='Модератор'
     )
 
     def __str__(self) -> str:
