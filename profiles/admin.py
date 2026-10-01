@@ -1,3 +1,22 @@
 from django.contrib import admin
+from .models import Profile
+from django.contrib.auth.models import User
+from django.contrib.auth.admin import UserAdmin
 
-# Register your models here.
+class ProfileInline(admin.StackedInline):
+    model = Profile
+    can_delete = False
+    fields = ('is_moderator', 'bio', 'avatar', 'phone')
+
+class CustomUserAdmin(UserAdmin):
+    inlines = [ProfileInline]
+    list_display = ('username', 'email', 'first_name', 'last_name',
+                    'is_staff', 'is_moderator')
+
+    def is_moderator(self, obj):
+        if hasattr(obj, 'profile'):
+            return obj.profile.is_moderator
+        return False
+
+admin.site.unregister(User)
+admin.site.register(User, CustomUserAdmin)
